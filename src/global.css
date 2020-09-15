@@ -1,0 +1,30 @@
+/*Criaçaão das cascading files globais caso precise criar mais de uma page e fique igual
+/*Apenas anotações para praticar*/
+
+:root  {
+font-size: 60%
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, #root {
+    /*ocupa 100% da tela*/
+    height: 100vh;
+}
+
+#root {
+    /*Todo elemento que entra no root será automaticamente alinhando no centro*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 90vw;
+    max-width: 700px;
+}
+
