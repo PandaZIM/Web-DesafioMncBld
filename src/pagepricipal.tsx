@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import './pageprincipal.sass'
+import api from './services/api';
 // import { Container } from './styles';
 
 const PagePrincipal: React.FC = () => {
@@ -11,19 +12,39 @@ const PagePrincipal: React.FC = () => {
   const [userGender, setUserGender] = useState('')
   const [userCPF, setUserCPF] = useState('')
 
-  const submitUserInformation = () => {
-    const userInformation = {
-      'Name' : userName,
-      'Last Name' : userLastName,
-      'Birthday': userBirthday,
-      'Gender': userGender,
-      'CPF': userCPF
-    }
+  const handleCreateUser = (e: FormEvent) => {
+    console.log('entrou')
+
+    // const userInformation = {
+    //   nome : userName,
+    //   sobreNome : userLastName,
+    //   dataNascimento: userBirthday,
+    //   genero: userGender,
+    //   cpf: userCPF
+    // }
+
+    e.preventDefault()
+
+    api.post('users', {
+      nome : userName,
+      sobreNome : userLastName,
+      dataNascimento: userBirthday,
+      genero: userGender,
+      cpf: userCPF
+    }).then(() => {
+      alert('Cadastro realizado com sucesso');
+
+
+    }).catch(() => {
+      alert('erro no cadastro')
+    })
   }
+
+
   return(
     <div id="page-principal" className=".container">
         <div id="page-principal-conteudo">
-            <form action="">
+            <form onSubmit={handleCreateUser}>
             <legend>Insira os dados</legend>
                 <fieldset>
                     
@@ -43,7 +64,10 @@ const PagePrincipal: React.FC = () => {
                     placeholder="CPF"
                     onChange={e => setUserCPF(e.target.value)}/>
                     
+
                 </fieldset>
+
+                <button type='submit'>Submit</button>
             </form>
         </div>
     </div>
